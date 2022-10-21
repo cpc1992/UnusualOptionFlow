@@ -1,0 +1,157 @@
+<% layout('commons/boilerplate')%>
+<div class="d-flex">
+    <div class="d-flex flex-column me-auto">
+        <div class="d-flex flex-row align-items-center">
+            <h5 class="mb-0 d-inline-block"><%= day %></h5>
+            <% if(isToday){ %>
+            <span class="badge rounded-pill bg-selected2 text-dark ms-auto">Today</span>
+            <% } %>
+        </div>
+        <h4 class="mb-0"><%= date %></h4>
+    </div>
+
+    <div class="d-flex flex-column justify-content-end align-items-center">
+        <h3 class="my-0">Earnings Calendar</h3>
+        <p class="my-0"><%= displayEarnings.length %> Companies</p>
+    </div>
+
+    <div class="d-flex align-items-end ms-auto">
+        <a class="btn btn-sm btn-secondary py-0 calbutton" href="/flow/earnings?day=<%= yesterdayQuery %>">Left</a>
+        <form class="calForm" action="/flow">
+            <input class="calendar mx-1" name=day type="date">
+        </form>
+        <a class="btn btn-sm btn-secondary py-0 calbutton" href="/flow/earnings?day=<%= tomorrowQuery %>">Right</a>
+    </div>
+</div>
+
+<div class="d-flex flex-row">
+
+
+    <div id="allEntriesDiv" class="flex-grow-1 ps-2">
+        <table id="earningsTable" class="table table-hover allEntries">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">
+                        <div onClick="reorder('ticker')">Ticker</div>
+                    </th>
+                    <th scope="col">Name</th>
+                    <th scope="col">
+                        <div onClick="reorder('time')">Earnings Time</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="earningsData">
+                <%let i = 1; %>
+                <% for(entry of displayEarnings){ %>
+                <tr class="earningsRow">
+                    <td scope="row"><b><%= i %></b></td>
+                    <td><b><a id="ticker" class="ticklink" href="/flow/<%= entry.ticker %>"> <%= entry.ticker %>
+                            </a></b></td>
+                    <td id="name"><%= entry.companyName%></td>
+                    <td id="time"><%= entry.earningsString %></td>
+                </tr>
+                <% i++; %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+
+    let datePicker = document.querySelector('.calendar');
+
+    datePicker.addEventListener('change', function (e) {
+        let calDate = (e.target.value).split('-');
+        console.log(calDate);
+        document.location.href = `/flow/earnings?day=${calDate[1]}.${calDate[2]}.${calDate[0]}`;
+    })
+
+    function reorder(type) {
+        let sortedArr = [];
+        let rows = document.querySelectorAll(".earningsRow");
+        rows.forEach(ele => {
+            sortedArr.push({
+                ticker: ele.querySelector("#ticker").innerText,
+                companyName: ele.querySelector("#name").innerText,
+                time: ele.querySelector("#time").innerText
+            })
+        })
+
+        let key = {
+            "Before Market Open": 1,
+            "After Market Close": 2,
+            "Time Not Supplied": 3
+        }
+
+        if (type == "time") {
+            sortedArr.sort((a, b) => {
+                if (key[a.time] == key[b.time]) {
+                    return 0;
+                } else if (key[a.time] > key[b.time]) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            })
+        } else {
+            sortedArr.sort((a, b) => {
+                if (a.ticker > b.ticker) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            })
+        }
+
+        let data = document.querySelector("#earningsData");
+        data.remove();
+
+        let table = document.querySelector("#earningsTable");
+        let newBody = document.createElement("tbody");
+        newBody.id = "earningsData";
+
+        sortedArr.forEach((ele, idx) => {
+            let newRow = document.createElement("tr");
+            newRow.className = "earningsRow"
+
+            let td1 = document.createElement("td");
+            td1.scope = "row";
+
+            let b1 = document.createElement("b");
+            b1.innerText = idx + 1;
+
+            let td2 = document.createElement("td");
+
+            let b2 = document.createElement("b");
+
+            let a2 = document.createElement("a");
+            a2.id = "ticker";
+            a2.className = "ticklink";
+            a2.href = "/flow/" + ele.ticker;
+            a2.innerText = ele.ticker;
+
+            let td3 = document.createElement("td");
+            td3.id = "name";
+            td3.innerText = ele.companyName;
+
+            let td4 = document.createElement("td");
+            td4.id = "time";
+            td4.innerText = ele.time;
+
+            newBody.appendChild(newRow);
+            newRow.appendChild(td1);
+            td1.appendChild(b1);
+            newRow.appendChild(td2);
+            td2.appendChild(b2);
+            b2.appendChild(a2);
+            newRow.appendChild(td3);
+            newRow.appendChild(td4);
+
+        })
+
+        table.appendChild(newBody);
+
+    }
+</script>

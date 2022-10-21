@@ -1,0 +1,25 @@
+<% layout('commons/boilerplate')%>
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <div class="text-center alert alert-danger" role="alert">
+            <h4 class="alert-heading">Uh Oh!</h4>
+            <p>Looks like something went wrong</p>
+            <hr>
+            <p>Please try your action again or go back. </p>
+            <p> <i>If you can recreate the error that got you here please email me
+                    with the bug you've found! <br> This is
+                    just a personal project of mine so thanks for visiting (: -cliff </i>
+            </p>
+            <p>cliffordpchan@gmail.com</p>
+            <p><i><%= err.message%> </i></p>
+            <p><%=err.stack%></p>
+            <p class="mb-0">Status code:
+                <%=err.status%> </p>
+            <hr>
+
+            <a href="">Go back</a>
+        </div>
+
+    </div>
+</div>

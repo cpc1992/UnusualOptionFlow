@@ -1,0 +1,131 @@
+<% layout('commons/boilerplate')%>
+
+<div class="d-flex">
+    <div class="d-flex flex-column me-auto">
+        <div class="d-flex flex-row align-items-center">
+            <h5 class="mb-0 d-inline-block"><%= day %></h5>
+            <% if(isToday){ %>
+            <span class="badge rounded-pill bg-selected2 text-dark ms-auto">Today</span>
+            <% } %>
+        </div>
+        <h4 class="mb-0"><%= date %></h4>
+    </div>
+    <div class="d-flex flex-column justify-content-end align-items-center">
+        <h3 class="my-0">Unusual Options</h3>
+        <p class="my-0"><%= displayTrades.length %> Trades <%= mapArray.length %> Tickers</p>
+    </div>
+    <div class="d-flex align-items-end ms-auto">
+        <a class="btn btn-sm btn-secondary py-0 calbutton" href="/flow?day=<%= yesterdayQuery %>">Left</a>
+        <form class="calForm" action="/flow">
+            <input class="calendar mx-1" name=day type="date">
+        </form>
+        <a class="btn btn-sm btn-secondary py-0 calbutton" href="/flow?day=<%= tomorrowQuery %>">Right</a>
+    </div>
+</div>
+
+
+<div class="d-flex flex-row">
+    <div id="mapEntriesDiv" class="flex-grow-0 border-end pe-2">
+        <table class="table table-hover mapEntries">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Ticker</th>
+                    <th scope="col">Calls</th>
+                    <th scope="col">Call Prem</th>
+                    <th scope="col">Puts</th>
+                    <th scope="col">Put Prem</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <% let j = 1; %>
+                <% let classy = 'asd'; %>
+                <% for(const ticker of mapArray) { %>
+                <% if(ticker[1].callPrem > ticker[1].putPrem) {  
+                     classy = 'callHeavy';                     
+                 }else{                                        
+                     classy = 'putHeavy';                      
+                 } %>
+
+                <tr class="<%= ticker[0] %> <%= classy %>">
+                    <th scope="row"> <%= j %> </th>
+                    <th scope="row"><a class="ticklink" href="/flow/<%= ticker[0] %>"> <%= ticker[0] %> </a></th>
+                    <td> <%= ticker[1].call %> </td>
+                    <td> $<%= ticker[1].formattedCall %> </td>
+                    <td> <%= ticker[1].put %> </td>
+                    <td> $<%= ticker[1].formattedPut %> </td>
+
+                </tr>
+                <% j++ %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <div id="allEntriesDiv" class="flex-grow-1 border-start ps-2">
+        <table class="table table-hover allEntries">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th class="extra" scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Ticker</th>
+                    <th scope="col">Expiry</th>
+                    <th scope="col">Call/Put</th>
+                    <th scope="col">Strike</th>
+                    <th class="extra" scope="col">Spot</th>
+                    <th class="extra" scope="col">Quantity</th>
+                    <th class="extra" scope="col">Price</th>
+                    <th class="extra" scope="col">Type</th>
+                    <th scope="col">Premium</th>
+                    <th scope="col">Flags</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%let i = displayTrades.length; %>
+                <% for(entry of displayTrades){ %>
+                <tr class="<%= entry.ticker %> <%= entry.optionType %>">
+                    <td scope="row"><b><%= i %></b></td>
+                    <td class="extra"><%= entry.tradeDate[0] %></td> <!-- date -->
+                    <td><%= entry.tradeDate[1] %></td> <!-- time -->
+                    <td class="ticker"><b><a class="ticklink2"
+                                href="/flow/<%= entry.ticker %>"><%= entry.ticker %></a></b>
+                    </td> <!-- ticker -->
+                    <td><%= entry.expiry %></td>
+                    <td class="optype"><b><%= entry.optionType %></b></td> <!-- call/put -->
+                    <td><%= entry.strike % 1 == 0 ? entry.strike : entry.strike.toFixed(2)%></td>
+                    <td class="extra">$<%= entry.spot.toFixed(2) %></td>
+                    <td class="extra"><%= entry.quantity %></td> <!-- quantity -->
+                    <td class="extra">$<%= entry.price.toFixed(2) %></td> <!-- price-->
+                    <td class="extra"><%= entry.type %></td>
+                    <td class="premium"><b>$<%= entry.formattedCash %></b></td> <!-- premium -->
+                    <td class="extra">
+                        <%if(entry.earningsPlay){ %>
+                        <img style="width: 1rem" src="/images/earnings.png" alt="">
+                        <% } %>
+                        <%if(entry.itm){ %>
+                        <img style="width: 1rem" src="/images/itm.png" alt="">
+                        <% } %>
+                        <%if(entry.shortDTE){ %>
+                        <img style="width: 1rem" src="/images/shortDTE.png" alt="">
+                        <% } %>
+                    </td>
+                </tr>
+                <% i--; %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="/javascript/colorCallsPuts.js"></script>
+<script src="/javascript/highlightRelatedRows.js"></script>
+<script>
+    let datePicker = document.querySelector('.calendar');
+
+    datePicker.addEventListener('change', function (e) {
+        let calDate = (e.target.value).split('-');
+        console.log(calDate);
+        document.location.href = `/flow?day=${calDate[1]}.${calDate[2]}.${calDate[0]}`;
+    })
+</script>

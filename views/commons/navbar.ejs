@@ -1,0 +1,55 @@
+<nav class="navbar mb-2 sticky-top navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand py-0 px-1" href="/flow">CC</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
+
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="text-nowrap nav-link py-0" href="/flow">Flow</a></li>
+                <li class="nav-item"><a class="text-nowrap nav-link py-0" href="/flow/earnings">Earnings</a></li>
+                <li class="nav-item"><a class="text-nowrap nav-link py-0" href="/sectors">Sectors</a></li>
+            </ul>
+            <div class="my-auto d-flex">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle py-0" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Flags
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><span class="dropdown-item-unclickable"> <img style="width: 1rem"
+                                        src="/images/earnings.png" alt="">
+                                    =
+                                    Earnings before next session</span></li>
+                            <li><span class="dropdown-item-unclickable"> <img style="width: 1rem" src="/images/itm.png"
+                                        alt=""> = In
+                                    the
+                                    money</span></li>
+                            <li><span class="dropdown-item-unclickable"> <img style="width: 1rem"
+                                        src="/images/shortDTE.png" alt="">
+                                    =
+                                    Expiring this week</span></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <form class="input-group d-flex" action="/flow/search">
+
+                    <div class="">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text py-0">$</span>
+                            </div>
+                            <input type="search" size="6" class="form-control py-0" name="ticker" placeholder="Ticker"
+                                required>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
