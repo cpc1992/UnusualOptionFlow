@@ -9,7 +9,7 @@ const serverOutput = path.join(__dirname, '..', 'public', 'outputs', 'server.txt
 const updateOutput = path.join(__dirname, '..', 'public', 'outputs', 'updates.txt');
 const puppeteer = require('puppeteer');
 
-//takes in request date from req.query (08.05.92) and checks if they are valid then returns a Date object of requested date. or null if not valid. 
+//takes in request date from req.query (08.05.92) and checks if they are valid then returns a Date object of requested date. or null if not valid.
 function cleanRequestDate(reqdate) {
     let dateArray = reqdate.split('.');
     if (dateArray.length == 3 &&
@@ -65,7 +65,7 @@ function formatCash(n) {
     if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
 }
 
-//call discord api to pull messages from channel. 100 messages after the messageid passed. 
+//call discord api to pull messages from channel. 100 messages after the messageid passed.
 async function callDiscordAPI(messageID) {
 
     let lastMessage = messageID;
@@ -169,7 +169,7 @@ async function fill() {
     }
 }
 
-//The array looks like this: 
+//The array looks like this:
 //  [0]  Ticker
 //  [1]  Time
 //  [2]  Expiry
@@ -245,7 +245,7 @@ async function cleanUp(tradeData) {
     let exp = new Date(splitArray[2]);
     splitArray[2] = exp;
 
-    //split up details 
+    //split up details
     let details = splitArray[6];
     let detArray = details.split('@');
 
@@ -278,7 +278,7 @@ async function cleanUp(tradeData) {
     let pullEndDate = new Date(pullDate.getFullYear(), pullDate.getMonth(), pullDate.getDate() + 1);
     let pullEndDate2 = new Date(pullEndDate.getFullYear(), pullEndDate.getMonth(), pullEndDate.getDate() + 1);
 
-    //gets earnings for today after market close or tomorroe before market open. 
+    //gets earnings for today after market close or tomorroe before market open.
     let earningsLaterToday = await TickerDetail.find({ earningsDate: { $gte: pullDate, $lt: pullEndDate }, earningsString: 'After Market Close' }).lean();
     let earningsTomorrowMorning = await TickerDetail.find({ earningsDate: { $gte: pullEndDate, $lt: pullEndDate2 }, earningsString: 'Before Market Open' }).lean();
     let upcomingEarnings = earningsLaterToday.concat(earningsTomorrowMorning);
@@ -300,7 +300,7 @@ async function cleanUp(tradeData) {
     }
     splitArray.push(earningsPlay);
 
-    //if the option is in the money set itm to true. 
+    //if the option is in the money set itm to true.
     let itm = false;
     if (splitArray[4] == 'Call') {
         //Call
@@ -326,8 +326,8 @@ async function cleanUp(tradeData) {
 }
 
 //scrapes Yahoo finance earnings page in this form:
-// https://finance.yahoo.com/calendar/earnings?day=24-08-2021&offset=100&size=100 
-// if the console start saying 0 items found... then Yahoo has rewritten their earnings page and this will need to re-worked. 
+// https://finance.yahoo.com/calendar/earnings?day=24-08-2021&offset=100&size=100
+// if the console start saying 0 items found... then Yahoo has rewritten their earnings page and this will need to re-worked.
 async function scrapeYahoo() {
 
     //starting from today. scrape 31 days out of earnings data.
@@ -360,7 +360,7 @@ async function scrapeYahoo() {
             printOutput("Scraping " + fullUrl + ". " + pulled + " items found.", 'updates');
             // console.log("Scraping " + fullUrl + ". " + pulled + " items found.");
 
-            //$elemSelector holds an array of all rows. 
+            //$elemSelector holds an array of all rows.
             $(elemSelector).each(async function (i, e) {
 
                 //iterate through each row and grab the ticker, company name, and earnings time.
@@ -393,13 +393,13 @@ async function scrapeYahoo() {
         } while (pulled == 100);
 
         //the yahoo finance calendar page sometimes shows duplicates leading to not the right amount of docs inserted.
-        //count how many were inserted for this day and re-run if needed. 
+        //count how many were inserted for this day and re-run if needed.
         let tomorrow = new Date(todaysDate.getFullYear(), todaysDate.getMonth(), todaysDate.getDate() + 1);
         let insertedd = await TickerDetail.find({ earningsDate: { $gte: todaysDate, $lt: tomorrow } }).countDocuments();
         printOutput("actually inserted " + insertedd, 'updates');
         // console.log("actually inserted " + insertedd);
 
-        // move to the next day. 
+        // move to the next day.
         todaysDate.setDate(todaysDate.getDate() + 1);
         weekCount++;
     } while (weekCount < thisManyDays);
@@ -408,7 +408,7 @@ async function scrapeYahoo() {
 }
 
 
-// To get puppeteer to run on heroku i had to change the default browser launch parameters, install a buildpack, and clear the cache. then repush 
+// To get puppeteer to run on heroku i had to change the default browser launch parameters, install a buildpack, and clear the cache. then repush
 // 1) Declare browser as:
 // const browser = await puppeteer.launch({
 //                   headless: true,
@@ -512,7 +512,7 @@ function getClosestDayOfWeek(date, dayOfWeek) {
     return date;
 }
 
-//synchronous waiting so Yahoo doesnt kick me off. 
+//synchronous waiting so Yahoo doesnt kick me off.
 function syncWait(ms) {
     return new Promise((resolve) => { setTimeout(resolve, ms) });
 }
@@ -532,6 +532,7 @@ function isToday(someDate) {
 }
 
 function printOutput(string, filename) {
+    return
     let file;
     switch (filename) {
         case 'server':
