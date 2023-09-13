@@ -272,6 +272,8 @@ module.exports.passwordScreen = async (req, res) => {
 
 //enter password via post
 module.exports.enterPassword = async (req, res) => {
+    console.log(req.body.password)
+    console.log(process.env.PASSWORD)
     if (req.body.password == process.env.PASSWORD) {
         //if enter the correct password, deliver cookie and redirect to flow
         //cookie is signed and will last 1 hour
