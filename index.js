@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // remove static public folder for vercel configuration or not
 console.log(__dirname)
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //'mongodb://localhost:27017/options'
 const dbURL = process.env.DB_URL;
