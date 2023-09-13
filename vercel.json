@@ -10,10 +10,10 @@
             "use": "@vercel/static"
         }
     ],
-    "routes": [
+    "rewrites": [
         {
-            "src": "/(.*)",
-            "dest": "/public"
+            "src": "/",
+            "dest": "/"
         }
     ]
 }
