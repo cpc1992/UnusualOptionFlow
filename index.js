@@ -19,6 +19,7 @@ app.set('views', path.join(__dirname, "/views"));
 app.use(express.urlencoded({ extended: true }));
 
 // remove static public folder for vercel configuration or not
+console.log(__dirname)
 app.use(express.static('public'));
 
 //'mongodb://localhost:27017/options'
