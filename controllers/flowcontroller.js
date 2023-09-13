@@ -21,7 +21,7 @@ module.exports.redirector = (req, res) => {
 }
 
 // Main unusual option table. pulls trade objects from mongo, transforms them and sends to front end.
-// also creates a hashmap based on the ticker to count the sum of call and put premium for the day. 
+// also creates a hashmap based on the ticker to count the sum of call and put premium for the day.
 // map: key = ticker, value = object with call/put count sum and call/put premium sum
 module.exports.dailyFlow = async (req, res) => {
 
@@ -65,7 +65,7 @@ module.exports.dailyFlow = async (req, res) => {
 
     for (trade of displayTrades) {
 
-        //format on server side for front end 
+        //format on server side for front end
         let pstTime = new Date(trade.tradeDate.getFullYear(), trade.tradeDate.getMonth(), trade.tradeDate.getDate());
         pstTime.setHours(trade.tradeDate.getHours() - 3, trade.tradeDate.getMinutes(), trade.tradeDate.getSeconds(), 0);
         trade.tradeDate = formatTD(pstTime);
@@ -151,7 +151,7 @@ module.exports.tickerFlow = async (req, res) => {
     let displayTrades = await UnusualTrade.find({ ticker: ticker }).sort({ tradeDate: -1 }).lean();
 
     for (trade of displayTrades) {
-        //format on server side for front end 
+        //format on server side for front end
         let pstTime = new Date(trade.tradeDate.getFullYear(), trade.tradeDate.getMonth(), trade.tradeDate.getDate());
         pstTime.setHours(trade.tradeDate.getHours() - 3, trade.tradeDate.getMinutes(), trade.tradeDate.getSeconds(), 0);
         trade.tradeDate = formatTD(pstTime);
@@ -167,8 +167,9 @@ module.exports.tickerFlow = async (req, res) => {
 module.exports.earningsData = async (req, res) => {
     let pullDate;
     if (!req.query.day) {
+
         //if no day query provided goto today and establish puyllDate
-        pullDate = new Date();
+        pullDate = new Date(2022, 5, 9, 12);
         pullDate.setHours(0, 0, 0, 0);
     } else {
         //establish pullDate

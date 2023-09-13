@@ -38,28 +38,27 @@ mongoose.connect(dbURL, {
 
 /*
         cron notation:
- +------------------- second (0 - 60)   
+ +------------------- second (0 - 60)
  |  +---------------- minute (0 - 59)
  |  |  +------------- hour (0 - 23)
  |  |  |  +---------- day of month (1 - 31)
  |  |  |  |  +------- month (1 - 12)
  |  |  |  |  |  +---- day of week (0 - 6) (Sunday=0 or 7)
  |  |  |  |  |  |
- *  *  *  *  *  * 
+ *  *  *  *  *  *
 */
 
-
 // pull discord messages. this job will run: every 30 seconds, every minute, from hours 6am - 2pm, every day, every month, Only Mon - Fri
-const pullDiscord = schedule.scheduleJob('*/30 * 6-13 * * 1-5', fill);
+// const pullDiscord = schedule.scheduleJob('*/30 * 6-13 * * 1-5', fill);
 
 // scrape yahoo earnings data. this job will run: Once a day a 6:15am, every day, every month, only mon-friday
-const pullYahoo = schedule.scheduleJob('0 15 6 * * 1-5', scrapeYahoo);
+// const pullYahoo = schedule.scheduleJob('0 15 6 * * 1-5', scrapeYahoo);
 
 // clear logs. this job will run: at 6:14 am, every monday
-const clearLogs = schedule.scheduleJob('0 14 6 * * 1', clearOutput);
+// const clearLogs = schedule.scheduleJob('0 14 6 * * 1', clearOutput);
 
 // scrape sector percentages. this job will run: Once a day a 6:15am, every day, every month, only mon-friday
-const scrapeSectors = schedule.scheduleJob('0 15 6 * * 1-5', scrapeSectorSpdr);
+// const scrapeSectors = schedule.scheduleJob('0 15 6 * * 1-5', scrapeSectorSpdr);
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
@@ -72,8 +71,6 @@ app.post('/auth', enterPassword);
 
 //checkCookies middleware will check if they have the pwtoken cookie and redirect to auth if not
 app.use(checkCookies);
-
-
 
 app.get('/', redirector);
 
@@ -97,8 +94,6 @@ app.get('/flow/:ticker', catchAsync(tickerFlow));
 
 app.get('/sectors', catchAsync(sectors));
 
-
-
 app.use((err, req, res, next) => {
 
     printOutput('we are in the error handling middleware', 'server');
@@ -113,8 +108,6 @@ app.use((err, req, res, next) => {
         err.status = 500;
     }
     res.render('commons/error', { title: 'Error', err });
-
-
 })
 
 const port = process.env.PORT;
