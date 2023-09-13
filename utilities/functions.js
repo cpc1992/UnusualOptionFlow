@@ -533,22 +533,22 @@ function isToday(someDate) {
 
 function printOutput(string, filename) {
     return
-    let file;
-    switch (filename) {
-        case 'server':
-            file = serverOutput;
-            break;
-        case 'updates':
-            file = updateOutput;
-            break;
-        default:
-            console.log('Print output missing filename');
-            return;
-    }
+    // let file;
+    // switch (filename) {
+    //     case 'server':
+    //         file = serverOutput;
+    //         break;
+    //     case 'updates':
+    //         file = updateOutput;
+    //         break;
+    //     default:
+    //         console.log('Print output missing filename');
+    //         return;
+    // }
 
-    fs.appendFile(file, new Date().toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'medium' }) + ': ' + string + '\r\n', function (err) {
-        if (err) throw err;
-    });
+    // fs.appendFile(file, new Date().toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'medium' }) + ': ' + string + '\r\n', function (err) {
+    //     if (err) throw err;
+    // });
 }
 
 function clearOutput() {
