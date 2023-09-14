@@ -98,8 +98,10 @@ main {
   padding: 0 10px;
 }
 
-#logo {
-  color: #d1d1d1;
+svg {
+  fill: #d1d1d1;
+  height: 50px;
+  opacity: 0.5;
 }
 
 @media (max-width: 1120px) {
