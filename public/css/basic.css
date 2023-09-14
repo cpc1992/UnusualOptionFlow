@@ -92,16 +92,11 @@ main {
   font-size: 2rem;
   padding: 0 0;
 }
+
 .backbtn {
   font-size: 2rem;
   margin: 0 0;
   padding: 0 10px;
-}
-
-svg {
-  fill: #d1d1d1;
-  height: 50px;
-  opacity: 0.5;
 }
 
 @media (max-width: 1120px) {
