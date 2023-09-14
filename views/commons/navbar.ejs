@@ -1,55 +1,113 @@
 <nav class="navbar mb-2 sticky-top navbar-expand-sm navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand py-0 px-1" href="/flow">CC</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
-
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="text-nowrap nav-link py-0" href="/flow">Flow</a></li>
-                <li class="nav-item"><a class="text-nowrap nav-link py-0" href="/flow/earnings">Earnings</a></li>
-                <li class="nav-item"><a class="text-nowrap nav-link py-0" href="/sectors">Sectors</a></li>
+  <div class="container">
+    <a class="navbar-brand py-0 px-1" href="/flow">
+      <svg
+        version="1.1"
+        id="logo"
+        xmlns="http://www.w3.org/2000/svg"
+        x="0px"
+        y="0px"
+        viewBox="0 0 372 372"
+      >
+        <g>
+          <path
+            d="M186,0C83.439,0,0,83.439,0,186s83.439,186,186,186s186-83.439,186-186S288.561,0,186,0z M350.163,210.679h-85.292
+		C270.751,201.699,280.85,196,292.1,196h59.59C351.394,200.953,350.886,205.85,350.163,210.679z M186,20
+		c88.174,0,160.501,69.106,165.69,156H292.1c-24.333,0-45.337,16.514-51.079,40.16l-17.96,73.964l-37.159-153.032
+		c-6.827-28.117-31.803-47.754-60.737-47.754H51.127C81.283,47.381,130.502,20,186,20z M38.797,109.338h86.368
+		c17.638,0,33.106,10.736,39.466,26.733H27.677C30.613,126.782,34.349,117.846,38.797,109.338z M21.837,210.685
+		c-0.723-4.83-1.231-9.729-1.527-14.685h63.068c11.249,0,21.348,5.699,27.228,14.679H21.952
+		C21.913,210.679,21.876,210.684,21.837,210.685z M26.114,230.679H117.4l28.252,116.353
+		C87.928,332.563,42.095,287.794,26.114,230.679z M167.149,350.923c-0.035-0.19-0.062-0.38-0.108-0.57L134.456,216.16
+		C128.714,192.514,107.71,176,83.377,176H20.31c0.404-6.758,1.207-13.41,2.399-19.929h147.22l42.841,176.434l-4.334,17.848
+		c-0.01,0.043-0.015,0.086-0.024,0.128C201.08,351.476,193.601,352,186,352C179.626,352,173.338,351.626,167.149,350.923z
+		 M230.062,346.053l28.015-115.374h87.809C330.249,286.563,286.033,330.626,230.062,346.053z"
+          />
+        </g>
+      </svg>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse d-flex justify-content-between"
+      id="navbarNavAltMarkup"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="text-nowrap nav-link py-0" href="/flow">Flow</a>
+        </li>
+        <li class="nav-item">
+          <a class="text-nowrap nav-link py-0" href="/flow/earnings"
+            >Earnings</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="text-nowrap nav-link py-0" href="/sectors">Sectors</a>
+        </li>
+      </ul>
+      <div class="my-auto d-flex">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle py-0"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Flags
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <span class="dropdown-item-unclickable">
+                  <img style="width: 1rem" src="/images/earnings.png" alt="" />
+                  = Earnings before next session</span
+                >
+              </li>
+              <li>
+                <span class="dropdown-item-unclickable">
+                  <img style="width: 1rem" src="/images/itm.png" alt="" /> = In
+                  the money</span
+                >
+              </li>
+              <li>
+                <span class="dropdown-item-unclickable">
+                  <img style="width: 1rem" src="/images/shortDTE.png" alt="" />
+                  = Expiring this week</span
+                >
+              </li>
             </ul>
-            <div class="my-auto d-flex">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle py-0" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Flags
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><span class="dropdown-item-unclickable"> <img style="width: 1rem"
-                                        src="/images/earnings.png" alt="">
-                                    =
-                                    Earnings before next session</span></li>
-                            <li><span class="dropdown-item-unclickable"> <img style="width: 1rem" src="/images/itm.png"
-                                        alt=""> = In
-                                    the
-                                    money</span></li>
-                            <li><span class="dropdown-item-unclickable"> <img style="width: 1rem"
-                                        src="/images/shortDTE.png" alt="">
-                                    =
-                                    Expiring this week</span></li>
-                        </ul>
-                    </li>
-                </ul>
+          </li>
+        </ul>
 
-                <form class="input-group d-flex" action="/flow/search">
-
-                    <div class="">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text py-0">$</span>
-                            </div>
-                            <input type="search" size="6" class="form-control py-0" name="ticker" placeholder="Ticker"
-                                required>
-                        </div>
-                    </div>
-
-                </form>
+        <form class="input-group d-flex" action="/flow/search">
+          <div class="">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text py-0">$</span>
+              </div>
+              <input
+                type="search"
+                size="6"
+                class="form-control py-0"
+                name="ticker"
+                placeholder="Ticker"
+                required
+              />
             </div>
-        </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </nav>
