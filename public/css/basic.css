@@ -99,6 +99,17 @@ main {
   padding: 0 10px;
 }
 
+svg {
+  fill: #d1d1d1;
+  height: 28px;
+  padding-bottom: 3px;
+  opacity: 0.75;
+  transition: 0.5s;
+}
+svg:hover {
+  opacity: 1;
+}
+
 @media (max-width: 1120px) {
   #mapEntriesDiv {
     display: none;
