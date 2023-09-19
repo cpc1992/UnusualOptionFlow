@@ -274,18 +274,22 @@ module.exports.passwordScreen = async (req, res) => {
 module.exports.enterPassword = async (req, res) => {
     // console.log(req.body.password)
     // console.log(process.env.PASSWORD)
-    if (req.body.password == process.env.PASSWORD) {
-        //if enter the correct password, deliver cookie and redirect to flow
-        //cookie is signed and will last 1 hour
-        res.cookie('pwtoken', process.env.COOKIE_VALUE, { signed: true, expires: new Date(Date.now() + (1000 * 60 * 60 * 10)), httpOnly: true })
-        res.redirect('/flow');
-    } else {
-        //if they don't, redirect to same page.
-        res.clearCookie("pwtoken");
-        res.redirect('/auth');
+    // code modified to always allow them in - no more password. cookie expire in 10 hours
+    res.cookie('pwtoken', process.env.COOKIE_VALUE, { signed: true, expires: new Date(Date.now() + (1000 * 60 * 60 * 10)), httpOnly: true })
+    res.redirect('/flow');
 
-    }
-    printOutput('User entered password', 'server');
+    // if (req.body.password == process.env.PASSWORD) {
+    //     //if enter the correct password, deliver cookie and redirect to flow
+    //     //cookie is signed and will last 10 hours. cookie expire time is in miliseconds
+    //     res.cookie('pwtoken', process.env.COOKIE_VALUE, { signed: true, expires: new Date(Date.now() + (1000 * 60 * 60 * 10)), httpOnly: true })
+    //     res.redirect('/flow');
+    // } else {
+    //     //if they don't, redirect to same page.
+    //     res.clearCookie("pwtoken");
+    //     res.redirect('/auth');
+
+    // }
+    // printOutput('User entered password', 'server');
 
 
 }
