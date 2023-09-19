@@ -29,9 +29,9 @@ module.exports.dailyFlow = async (req, res) => {
     //no query will pull the last record and use that date
     let pullDate;
     if (!req.query.day) {
-        let lastRecord = await UnusualTrade.find({}).sort({ _id: -1 }).limit(1);
 
-        pullDate = lastRecord[0].tradeDate;
+        // let lastRecord = await UnusualTrade.find({}).sort({ _id: -1 }).limit(1);
+        pullDate = new Date(2022, 5, 9, 12);
         pullDate.setHours(0, 0, 0, 0);
     } else {
         let requestDate = req.query.day;
@@ -202,7 +202,7 @@ module.exports.sectors = async (req, res) => {
 
     let lastRecord = await SectorWeight.find({}).sort({ _id: -1 }).limit(1);
     if (lastRecord.length == 0) {
-        await scrapeSectorSpdr();
+        // await scrapeSectorSpdr();
         lastRecord = await SectorWeight.find({}).sort({ _id: -1 }).limit(1);
     }
     lastRecord = lastRecord[0];
