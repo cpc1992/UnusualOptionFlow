@@ -4,6 +4,8 @@ An app that shows unusually large stock option purchases and company earnings da
 
 Live site: https://unusual-option-flow.vercel.app
 
+Note: All API calls and scraping functionality was turned off in June 2022.
+
 ## Description
 
 The app uses the Discord API to pull in unusual stock option purchases and scrapes Yahoo Finance for company earnings data. 
