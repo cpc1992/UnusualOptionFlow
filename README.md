@@ -2,6 +2,8 @@
 
 An app that shows unusually large stock option purchases and company earnings data in a table format.
 
+Live site: https://unusual-option-flow.vercel.app
+
 ## Description
 
 The app uses the Discord API to pull in unusual stock option purchases and scrapes Yahoo Finance for company earnings data. 
@@ -12,7 +14,7 @@ A emoji flag will appear next to the option purchase indicating if the purchase 
 
 The front end is written in HTML/CSS with help from Bootstrap.    
 The back end is handled by an ExpressJS server.  
-The data is stored in a MongoDB data base.  
+The data is stored in a MongoDB database.  
 The Scraping is done using Cheerio and Pupeteer.  
 
 ## Authors
