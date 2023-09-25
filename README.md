@@ -1,6 +1,6 @@
 # Unusual Options Flow
 
-An app that shows unusually large stock option purchases and company earnings data in a table format.
+An app that compares unusually large stock option purchases and company earnings data in a table format.
 
 Live site: https://unusual-option-flow.vercel.app
 
@@ -14,10 +14,10 @@ A emoji flag will appear next to the option purchase indicating if the purchase 
 
 ## Technologies used:
 
-The front end is written in HTML/CSS with help from Bootstrap.    
-The back end is handled by an ExpressJS server.  
+The front-end is written in HTML/CSS with help from Bootstrap.    
+The back-end is handled by an ExpressJS server.  
 The data is stored in a MongoDB database.  
-The Scraping is done using Cheerio and Pupeteer.  
+The Scraping is done using Cheerio and Puppeteer.  
 
 ## Authors
 
